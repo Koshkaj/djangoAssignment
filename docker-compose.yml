@@ -1,0 +1,40 @@
+version: "3.3"
+
+services:
+  backend:
+    container_name: proexe_backend
+    build:
+      context: app-backend
+    volumes:
+      - "./app-backend:/code"
+    command: ["sh", "./start.sh"]
+    env_file:
+      - ./app-backend/.env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - main
+    restart: on-failure
+
+  db:
+    container_name: proexe_postgres
+    image: postgres:13
+    networks:
+      - main
+    ports:
+      - "5434:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=mysecretpassword
+      - POSTGRES_USER=dev
+      - POSTGRES_DB=dev
+
+networks:
+  main:
+    driver: bridge
+
+volumes:
+  pg-data:
