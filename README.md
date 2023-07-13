@@ -19,6 +19,16 @@ make dev
 running the tests
 ```shell
 make test
+---------------------------------------------------------------------
+Found 3 test(s).
+Creating test database for alias 'default'...
+System check identified no issues (0 silenced).
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.011s
+
+OK
+
 ```
 
 ## Notes:
